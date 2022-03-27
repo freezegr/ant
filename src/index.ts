@@ -6,7 +6,7 @@ export const Ant = class {
     #view: number;
     #canvas!: any;
     #ctx!: CanvasRenderingContext2D;
-    PenDown: boolean;
+    #PenDown: boolean;
 
     constructor(){
         this.#position = {
@@ -15,7 +15,7 @@ export const Ant = class {
         }
 
         this.#view = 90; //90 up | 180 right | 240 down | 360 left
-        this.PenDown = true
+        this.#PenDown = true
         this.#init()
     }
     
@@ -27,13 +27,15 @@ export const Ant = class {
         this.#position.y = 250
     }   
 
-    lootAt(degrees: number): void {
+    lootAt(degrees: number): this {
         if(degrees > 360) throw Error("Degress can't be bigger than 360");
         this.#view = degrees
+
+        return this
     }
 
-    walk(pixels: number): void {
-        if(this.PenDown == true) {
+    walk(pixels: number): this {
+        if(this.#PenDown == true) {
             this.#ctx.beginPath()
             this.#ctx.moveTo(this.#position.x, this.#position.y);
             let cords = this.#getDegressPosition(pixels)
@@ -45,11 +47,14 @@ export const Ant = class {
             this.#ctx.moveTo(this.#position.x, this.#position.y);
             let cords = this.#getDegressPosition(pixels)
             this.#updatePosition({ x: cords.x, y: cords.y });
-        }       
+        }
+        return this
     }
 
-    penDown(on: boolean): void {
-        this.PenDown = on
+    penDown(on: boolean): this {
+        this.#PenDown = on
+        
+        return this
     }
 
     save(): void {
