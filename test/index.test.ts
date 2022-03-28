@@ -3,11 +3,11 @@ import { Ant } from "../src/index"
 
 test('index', () => {
     const ant = new Ant()
-    .lootAt(90)
+    .lootAt(56)
     .walk(100)
-    .lootAt(180)
+    .lootAt(80)
     .walk(100)
-    .lootAt(270)
+    .lootAt(290)
     .walk(100)
     .lootAt(0)
     .walk(100)

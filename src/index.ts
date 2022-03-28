@@ -7,15 +7,14 @@ export const Ant = class {
     #canvas!: any;
     #ctx!: CanvasRenderingContext2D;
     #PenDown: boolean;
+    #color: string;
 
     constructor(){
-        this.#position = {
-            x: 0,
-            y: 0,
-        }
-
+        this.#position = { x: 0, y: 0 }
         this.#view = 90; //90 up | 180 right | 240 down | 360 left
         this.#PenDown = true
+        this.#color = '#ffffff'
+
         this.#init()
     }
     
@@ -31,6 +30,12 @@ export const Ant = class {
         if(degrees > 360) throw Error("Degress can't be bigger than 360");
         this.#view = degrees
 
+        return this
+    }
+
+    clear(): this {
+        this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
+        
         return this
     }
 
@@ -50,6 +55,11 @@ export const Ant = class {
         }
         return this
     }
+
+    setColor(color: string){
+        
+    }
+
 
     penDown(on: boolean): this {
         this.#PenDown = on
@@ -78,28 +88,23 @@ export const Ant = class {
         }
 
         if(this.#view > 1 && this.#view < 89){
-            cords.x = cords.x - pixels
-            cords.y = cords.y - pixels
+
         } 
 
         if(this.#view > 91 && this.#view < 179){
-            cords.x = cords.x + pixels
-            cords.y = cords.y - pixels
+
         }
 
         if(this.#view > 181 && this.#view < 269){
-            cords.x = cords.x - pixels
-            cords.y = cords.y - pixels
+
         }
 
         if(this.#view > 271 && this.#view < 360){
-            cords.x = cords.x + pixels
-            cords.y = cords.y + pixels
+
         }
 
         if(this.#view > 91 && this.#view < 179){
-            cords.x = cords.x - pixels
-            cords.y = cords.y + pixels
+
         }
 
         if(this.#view == 0){
